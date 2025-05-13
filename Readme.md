@@ -49,7 +49,7 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-git clone https://github.com/your-username/superboard-ui.git
+git clone https://github.com/harshvardhan614/superboard-harshvardhan.git
 cd frontend
 
 **Installation**
