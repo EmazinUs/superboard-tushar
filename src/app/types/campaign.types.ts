@@ -5,6 +5,13 @@ export type RewardCampaign = {
   endTime: string;
 };
 
+export type LeaderboardUser = {
+  rank: number;
+  username: string;
+  score: number;
+  totalPoints: number;
+};
+
 export type Campaign = {
   id: number;
   title: string;
