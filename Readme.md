@@ -68,3 +68,65 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the project.
+
+**Code Quality Tools Setup**
+
+This project uses Husky, lint-staged, and Prettier to maintain code quality and consistent formatting. Here's how to set them up:
+
+1. **Install Dependencies**
+
+```bash
+# Install Prettier
+npm install --save-dev prettier
+
+# Install Husky and lint-staged
+npm install --save-dev husky lint-staged
+```
+
+2. **Initialize Husky**
+
+```bash
+# Initialize Husky
+npx husky install
+```
+
+3. **Configure Prettier**
+
+Create a `.prettierrc` file in the root directory:
+
+```json
+{
+  "semi": true,
+  "trailingComma": "es5",
+  "singleQuote": true,
+  "tabWidth": 2,
+  "useTabs": false
+}
+```
+
+4. **Configure lint-staged**
+
+Add the following to your `package.json`:
+
+```json
+{
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": ["prettier --write", "eslint --fix"],
+    "**/*.{json,css,scss,md}": ["prettier --write"]
+  }
+}
+```
+
+5. **Add Husky Pre-commit Hook**
+
+```bash
+npx husky add .husky/pre-commit "npx lint-staged"
+```
+
+Now, whenever you commit changes, Husky will automatically run Prettier and ESLint on your staged files to ensure consistent code formatting and quality.
+
+You can also manually format your code using:
+
+```bash
+npm run format
+```
