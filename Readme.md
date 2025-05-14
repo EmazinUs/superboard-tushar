@@ -5,17 +5,18 @@ Project Description:
 My task is to build a responsive "Campaign page" similar to the provided mockup. This application will display campaign information across three device formats (desktop, tablet, and mobile) and will require both visual implementation and functional components.
 
 Project Requirements:
+
 ## Requirements
 
 ### Core Functionality
 
 1. Create a responsive dashboard that displays properly on desktop, tablet, and mobile devices
 2. Implement the following sections:
-    - Campaign header with title and description
-    - Campaign progress metrics (~75K USD worth of tokens, ~$17,000 traded)
-    - Rewards section with collectible items
-    - Quests section with clickable items
-    - Leaderboard section (simplified version is acceptable)
+   - Campaign header with title and description
+   - Campaign progress metrics (~75K USD worth of tokens, ~$17,000 traded)
+   - Rewards section with collectible items
+   - Quests section with clickable items
+   - Leaderboard section (simplified version is acceptable)
 
 ### Technical Requirements
 
@@ -48,7 +49,7 @@ Make sure you have the following installed on your machine:
 
 **Cloning the Repository**
 
-```bash
+````bash
 git clone https://github.com/harshvardhan614/superboard-harshvardhan.git
 cd frontend
 
@@ -58,7 +59,7 @@ Install the project dependencies using npm:
 
 ```bash
 npm install
-```
+````
 
 **Running the Project**
 
