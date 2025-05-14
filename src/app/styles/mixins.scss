@@ -65,9 +65,8 @@
   }
 
   @include desktop {
-    max-width: $breakpoint-lg;
-    padding-left: $spacing-6;
-    padding-right: $spacing-6;
+    max-width: $breakpoint-xl;
+    margin: 0 auto;
   }
 }
 

@@ -6,6 +6,7 @@ $color-background-secondary: #18181b;
 $color-background-campaign-card: #201c26;
 $color-background-campaign-card-hover: #292330;
 $color-background-search: #27272a;
+$color-text-search: #78716c;
 $color-text-primary: #ffffff;
 $color-text-secondary: #a3a3a3;
 $color-text-tertiary: #b0b0b0;
@@ -50,11 +51,11 @@ $border-radius-2xl: 1.5rem; // 24px
 $border-radius-full: 9999px; // Fully rounded
 
 // Breakpoints
-$breakpoint-sm: 640px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 1024px;
-$breakpoint-xl: 1280px;
-$breakpoint-2xl: 1536px;
+$breakpoint-sm: 639px;
+$breakpoint-md: 767px;
+$breakpoint-lg: 1023px;
+$breakpoint-xl: 1279px;
+$breakpoint-2xl: 1535px;
 
 // Z-index
 $z-index-dropdown: 1000;

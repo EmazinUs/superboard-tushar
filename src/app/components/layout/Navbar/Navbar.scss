@@ -18,6 +18,12 @@
     @include flex-between;
     flex: 1;
 
+    @include tablet {
+      flex: initial;
+      @include flex-center;
+      gap: $spacing-4;
+    }
+
     @include desktop {
       flex: initial;
       @include flex-center;
@@ -50,17 +56,14 @@
     height: 40px;
     border-radius: $border-radius-full;
     color: $color-text-secondary;
+    display: flex;
 
     @include tablet {
-      display: none;
+      display: none !important;
     }
 
     @include desktop {
-      display: none;
-    }
-
-    @include tablet {
-      display: none;
+      display: none !important;
     }
   }
 
@@ -78,19 +81,62 @@
     &:hover {
       color: $color-text-primary;
     }
+
+    &.navbar__search-button {
+      @include tablet {
+        display: none !important;
+      }
+
+      @include desktop {
+        display: none !important;
+      }
+    }
   }
 
   &__center {
     flex: 1;
     display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition:
+      opacity $transition-normal ease-in-out,
+      transform $transition-normal ease-in-out;
+
+    &.mobile-visible {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      padding: $spacing-3;
+      background-color: $color-background-primary;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: $z-index-dropdown;
+    }
+
+    @include tablet {
+      position: relative;
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      top: auto;
+      left: auto;
+      right: auto;
+      padding: 0;
+      border: none;
+    }
 
     @include desktop {
       display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
   &__search-container {
-    max-width: 500px;
+    max-width: 350px;
     margin: 0 auto;
   }
 
@@ -104,22 +150,23 @@
     left: $spacing-3;
     top: 50%;
     transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    color: $color-text-tertiary;
+    width: 18px;
+    height: 18px;
+    color: $color-text-search;
+    margin-right: $spacing-2;
   }
 
   &__search-input {
     width: 100%;
     background-color: $color-background-secondary;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: none;
     border-radius: $border-radius-full;
-    padding: $spacing-2 $spacing-2 $spacing-2 $spacing-8;
+    padding: $spacing-3 $spacing-2 $spacing-3 $spacing-8;
     color: $color-text-primary;
     font-size: $font-size-sm;
 
     &::placeholder {
-      color: $color-text-tertiary;
+      color: $color-text-search;
     }
 
     &:focus {
@@ -140,6 +187,11 @@
 
     &:hover {
       background-color: #212121;
+    }
+
+    @include tablet {
+      display: flex;
+      width: 10rem;
     }
 
     @include desktop {
@@ -200,6 +252,10 @@
       padding: 0;
       font-size: $font-size-lg;
       line-height: 1;
+
+      @include tablet {
+        font-size: $font-size-md;
+      }
     }
 
     &-sub {
@@ -207,11 +263,15 @@
       padding: 0;
       font-size: $font-size-sm;
       line-height: 1;
+
+      @include tablet {
+        font-size: $font-size-xs;
+      }
     }
   }
 
   &__treat-count {
-    font-size: 1.75rem;
+    font-size: $font-size-xl;
     font-weight: normal;
     color: $color-text-primary;
   }
