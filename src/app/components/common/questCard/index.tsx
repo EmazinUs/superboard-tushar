@@ -2,7 +2,6 @@
 import React from 'react';
 import Image from 'next/image';
 import './questCard.scss';
-import Link from 'next/link';
 import { QuestCardProps } from '@/app/types/global.types';
 
 const QuestCard: React.FC<QuestCardProps> = ({
@@ -15,7 +14,7 @@ const QuestCard: React.FC<QuestCardProps> = ({
   chadsCount,
   boardLabel,
 }) => (
-  <Link href={href} className="quest-link">
+  <div className="quest-link">
     <div className="quest-card">
       <div className="image-wrapper">
         <Image src={backgroundImage} alt="Quest Background" fill className={'image-background'} />
@@ -36,7 +35,7 @@ const QuestCard: React.FC<QuestCardProps> = ({
         </div>
       </div>
     </div>
-  </Link>
+  </div>
 );
 
 export default QuestCard;

@@ -102,7 +102,7 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
             <div className="chain-info">
               {chainIcon && (
                 <div className="chain-icon">
-                  <Image src={chainIcon} alt={chainName} width={20} height={20} />
+                  <Image src={chainIcon} alt={chainName} width={16} height={16} />
                 </div>
               )}
               <div className="chain-name">{chainName}</div>
