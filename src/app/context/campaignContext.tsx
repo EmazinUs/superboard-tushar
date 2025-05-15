@@ -56,7 +56,7 @@ export const CampaignProvider: React.FC<CampaignProviderProps> = ({ children }) 
     fetchCampaigns();
   }, []);
 
-  const fetchCampaigns = async () => {
+  const fetchCampaigns = React.useCallback(async () => {
     try {
       setIsLoadingCampaigns(true);
       const fetchedCampaigns = await CampaignService.getCampaigns();
@@ -66,9 +66,9 @@ export const CampaignProvider: React.FC<CampaignProviderProps> = ({ children }) 
     } finally {
       setIsLoadingCampaigns(false);
     }
-  };
+  }, []);
 
-  const selectCampaign = async (id: number) => {
+  const selectCampaign = React.useCallback(async (id: number) => {
     try {
       setIsLoadingDetails(true);
 
@@ -91,14 +91,14 @@ export const CampaignProvider: React.FC<CampaignProviderProps> = ({ children }) 
     } finally {
       setIsLoadingDetails(false);
     }
-  };
+  }, []);
 
-  const refreshCampaignData = async () => {
+  const refreshCampaignData = React.useCallback(async () => {
     if (selectedCampaign) {
       await selectCampaign(selectedCampaign.id);
     }
     await fetchCampaigns();
-  };
+  }, [selectedCampaign, selectCampaign, fetchCampaigns]);
 
   const value = {
     campaigns,

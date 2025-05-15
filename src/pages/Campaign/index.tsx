@@ -1,9 +1,9 @@
 'use client';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import './CampaignPage.scss';
 import Container from '@/app/components/common/container';
 import Link from 'next/link';
-import { ChevronLeft, Copy } from 'lucide-react';
+import { ChevronLeft, Copy, Check } from 'lucide-react';
 import CampaignStats from '@/app/components/layout/CampaignStats';
 import SegmentControl from '@/app/components/common/segmentControl';
 import QuestCard from '@/app/components/common/questCard';
@@ -21,7 +21,8 @@ const CampaignPage: React.FC = () => {
 
   useEffect(() => {
     selectCampaign(MOCK_CAMPAIGN_ID);
-  }, [selectCampaign]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (isLoadingDetails || !selectedCampaign) {
     return (
