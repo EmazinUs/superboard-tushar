@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Globe, Twitter, ChevronDown, ChevronUp, Radio } from 'lucide-react';
+import { Globe, Twitter, ArrowUp, ArrowDown, Radio } from 'lucide-react';
 import './CampaignCard.scss';
 import { CampaignCardProps } from '@/app/types/global.types';
 
@@ -53,7 +53,7 @@ const CampaignCard: React.FC<CampaignCardProps> = ({
               onClick={toggleExpand}
               aria-label={isExpanded ? 'Show less' : 'Show more'}
             >
-              {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+              {isExpanded ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
             </button>
           )}
         </div>

@@ -23,6 +23,11 @@
     display: flex;
     gap: $spacing-8;
 
+    @include tablet {
+      flex-direction: column;
+      gap: $spacing-4;
+    }
+
     @include mobile {
       flex-direction: column;
       gap: $spacing-4;
@@ -33,12 +38,52 @@
     min-width: 320px;
     position: sticky;
     top: $spacing-4;
+    padding: 1rem;
+    background-color: #ec9de905;
+    border-radius: $border-radius-lg;
     height: calc(100vh - $spacing-8);
+
+    @include tablet {
+      width: 100%;
+      position: static;
+      height: auto;
+      min-width: unset;
+      padding: 1.5rem;
+
+      @include mobile {
+        padding: 1rem;
+      }
+
+      .campaign-cards {
+        display: flex;
+        flex-direction: row;
+        gap: $spacing-4;
+        overflow-x: auto;
+
+        /* Hide scrollbar but keep functionality */
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+
+        > * {
+          @include flex-center;
+          min-width: 320px;
+          width: 100%;
+        }
+      }
+    }
 
     @include mobile {
       width: 100%;
       position: static;
       height: auto;
+      min-width: unset;
+
+      .campaign-cards {
+        flex-direction: column;
+        overflow-x: visible;
+      }
     }
   }
 
