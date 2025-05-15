@@ -1,0 +1,152 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.campaign {
+  &-left-section {
+    @include flex-column;
+    width: 100%;
+    max-width: 420px;
+
+    @media (max-width: #{$breakpoint-lg}) {
+      max-width: 100%;
+    }
+  }
+
+  &-info {
+    @include flex-column;
+    gap: $spacing-2;
+  }
+
+  &-type {
+    text-transform: uppercase;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: $color-text-secondary;
+  }
+
+  &-title {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $color-text-primary;
+    margin: $spacing-1 0;
+    line-height: 1.2;
+
+    @include mobile {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &-description {
+    font-size: $font-size-base;
+    color: $color-text-tertiary;
+    line-height: 1.5;
+    margin-bottom: $spacing-4;
+    max-width: 90%;
+  }
+
+  &-image {
+    object-fit: cover;
+  }
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  border-radius: $border-radius-xl;
+  overflow: hidden;
+  margin-bottom: $spacing-6;
+}
+
+.live-indicator {
+  position: absolute;
+  top: $spacing-4;
+  right: $spacing-4;
+  @include flex-center;
+  gap: $spacing-1;
+  background-color: rgba($color-accent-blue, 0.2);
+  padding: $spacing-1 $spacing-3;
+  border-radius: $border-radius-xl;
+  z-index: $z-index-tooltip;
+
+  &-icon {
+    color: $color-text-primary;
+    @include flex-center;
+  }
+
+  &-text {
+    color: $color-text-primary;
+    font-size: $font-size-sm;
+    font-weight: 600;
+  }
+}
+
+.social-links {
+  @include flex-center;
+  justify-content: flex-start;
+  gap: $spacing-4;
+  margin-bottom: $spacing-6;
+}
+
+.social-icon {
+  color: $color-text-tertiary;
+  border: 1px solid $color-background-secondary;
+  border-radius: $border-radius-full;
+  width: 40px;
+  height: 40px;
+  @include flex-center;
+  transition: all $transition-fast ease;
+
+  &:hover {
+    color: $color-text-primary;
+    background-color: rgba($color-text-primary, 0.1);
+  }
+}
+
+.stats-container {
+  @include flex-between;
+  gap: $spacing-4;
+  padding: $spacing-4 0;
+  border-top: 1px solid $color-background-secondary;
+
+  @include mobile {
+    flex-wrap: wrap;
+  }
+}
+
+.stat {
+  min-width: 70px;
+
+  &-label {
+    font-size: $font-size-sm;
+    color: $color-text-tertiary;
+    margin-bottom: $spacing-1;
+  }
+
+  &-value {
+    font-size: $font-size-md;
+    font-weight: 600;
+    color: $color-text-primary;
+  }
+
+  &.chain {
+    .chain-info {
+      @include flex-center;
+      justify-content: flex-start;
+      gap: $spacing-2;
+
+      &-icon {
+        @include flex-center;
+        width: 22px;
+        height: 22px;
+      }
+
+      &-name {
+        font-size: $font-size-md;
+        font-weight: 600;
+        color: $color-text-primary;
+      }
+    }
+  }
+}
