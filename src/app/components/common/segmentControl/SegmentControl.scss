@@ -1,0 +1,40 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.segment {
+  &-control {
+    display: inline-flex;
+    border-radius: $border-radius-lg;
+    padding: $spacing-1;
+    margin-bottom: $spacing-6;
+  }
+
+  &-button {
+    flex: 1;
+    @include flex-center;
+    background: transparent;
+    border: none;
+    padding: $spacing-3 $spacing-5;
+    font-size: $font-size-base;
+    font-weight: 600;
+    color: $color-text-segment-control;
+    cursor: pointer;
+    letter-spacing: 0.025em;
+    border-radius: $border-radius-full;
+    transition: all $transition-fast ease;
+
+    &:hover {
+      color: $color-text-secondary;
+    }
+
+    &.active {
+      background-color: $color-background-search;
+      color: $color-text-primary;
+    }
+
+    @include mobile {
+      padding: $spacing-2;
+      font-size: $font-size-sm;
+    }
+  }
+}
