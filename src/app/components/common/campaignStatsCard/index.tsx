@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import Image from 'next/image';
-import './CampaignStatsCard.scss';
+import './campaignStatsCard.scss';
 import { Tally5, Trophy } from 'lucide-react';
 
 interface CampaignStatsCardProps {
