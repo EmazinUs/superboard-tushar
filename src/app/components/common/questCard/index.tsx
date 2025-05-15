@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { QuestCardProps } from '@/app/types/global.types';
 
 const QuestCard: React.FC<QuestCardProps> = ({
-  href,
+  href = '#',
   backgroundImage: backgroundImage,
   coinIcon,
   rewardAmount,

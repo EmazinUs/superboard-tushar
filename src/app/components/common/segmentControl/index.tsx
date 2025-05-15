@@ -1,12 +1,6 @@
 import React from 'react';
 import './SegmentControl.scss';
-
-interface SegmentControlProps {
-  segments: string[];
-  activeSegment: string;
-  onChange: (segment: string) => void;
-  ariaLabel?: string;
-}
+import { SegmentControlProps } from '@/app/types/global.types';
 
 const SegmentControl: React.FC<SegmentControlProps> = ({
   segments,

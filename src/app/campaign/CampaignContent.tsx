@@ -106,6 +106,7 @@ const CampaignPage: React.FC = () => {
               segments={['QUESTS', 'LEADERBOARD']}
               activeSegment={activeTab}
               onChange={setActiveTab}
+              ariaLabel="Campaign tabs"
             />
 
             {activeTab === 'QUESTS' ? (

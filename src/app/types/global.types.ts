@@ -35,3 +35,10 @@ export interface QuestCardProps {
   chadsCount: string;
   boardLabel: string;
 }
+
+export interface SegmentControlProps {
+  segments: string[];
+  activeSegment: string;
+  onChange: (segment: string) => void;
+  ariaLabel?: string;
+}
