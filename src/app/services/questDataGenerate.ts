@@ -1,4 +1,6 @@
 import { Quest, Task } from '../types/quests.types';
+import { questImages } from '../assets/exportData';
+
 const now = () => new Date().toISOString();
 
 export const createDummyQuest = (index: number): Quest => {
@@ -6,6 +8,10 @@ export const createDummyQuest = (index: number): Quest => {
   const tasks: Task[] = Array.from({ length: taskCount }, (_, i) =>
     createDummyTask(i + 1, index + 1, i)
   );
+
+  // Use modulo to cycle through the questImages array
+  const imageIndex = index % questImages.length;
+  const questImage = questImages[imageIndex];
 
   return {
     id: index + 1,

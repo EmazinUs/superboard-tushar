@@ -4,6 +4,7 @@ import {
   CampaignProgress,
   RewardCampaign,
 } from '../types/campaign.types';
+import { rariIcon, rewardProgressCat } from '../assets/exportData';
 
 export const mockCampaignProgress: CampaignProgress = {
   completedQuests: 8,
@@ -21,7 +22,7 @@ export const mockRewardCampaign: RewardCampaign = {
     'Complete all quests and loops, stack SUPR points, and climb the leaderboard for your share of $25,000 in rewards!',
   rewardAmount: 25000,
   rewardType: 'tokens',
-  imageUrl: 'https://cdn.superboard.xyz/uiProperties/images/newsol.png',
+  imageUrl: rewardProgressCat,
   endDate: '2025-05-16T10:26:00.000Z',
 };
 
@@ -30,9 +31,9 @@ export const mockCampaign: Campaign = {
   title: 'Assemble on Soneium',
   description:
     'Swap, stake, bridge, and mint your way to the top! Complete quests, stack SUPR points, and climb the leaderboard to claim your share of $25,000 in rewards.',
-  imageUrl: 'https://cdn.superboard.xyz/uiProperties/images/newsol.png',
+  imageUrl: rewardProgressCat,
   chainName: 'Soneium',
-  chainIcon: 'https://cdn.superboard.xyz/chains/soneium.png',
+  chainIcon: rariIcon,
   questCount: 26,
   chadCount: 434342,
   status: 'active',
