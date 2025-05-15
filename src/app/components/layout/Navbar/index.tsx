@@ -2,13 +2,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Navbar.scss';
 import Image from 'next/image';
-import logoImg from '@/app/assets/logo_modal.svg';
-import hungryCatImage from '@/app/assets/streak_hungry_cat.svg';
+import { logoModal, streakHungryCat } from '@/app/assets/exportData';
 import Link from 'next/link';
-
-interface NavbarProps {
-  treatCount?: number;
-}
+import { NavbarProps } from '@/app/types/global.types';
 
 export const Navbar: React.FC<NavbarProps> = ({ treatCount = 0 }) => {
   const [isMobileSearchVisible, setIsMobileSearchVisible] = useState(false);
@@ -86,7 +82,13 @@ export const Navbar: React.FC<NavbarProps> = ({ treatCount = 0 }) => {
             </button>
           )}
           <Link href="/" className="navbar__logo-link">
-            <Image src={logoImg} width={32} height={32} alt="Superboard" className="navbar__logo" />
+            <Image
+              src={logoModal}
+              width={32}
+              height={32}
+              alt="Superboard"
+              className="navbar__logo"
+            />
           </Link>
         </div>
 
@@ -124,7 +126,7 @@ export const Navbar: React.FC<NavbarProps> = ({ treatCount = 0 }) => {
               <div className="navbar__treat-icon-wrapper">
                 <div className="fade h-full w-full" data-loaded="true">
                   <Image
-                    src={hungryCatImage}
+                    src={streakHungryCat}
                     alt="Treats"
                     width={1080}
                     height={720}
