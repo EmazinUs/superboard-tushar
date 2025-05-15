@@ -4,7 +4,7 @@ import {
   Campaign,
   CampaignDetail,
   CampaignProgress,
-  LeaderboardUser,
+  LeaderboardProps,
   RewardCampaign,
 } from '../types/campaign.types';
 import { Quest } from '../types/quests.types';
@@ -19,7 +19,7 @@ interface CampaignContextType {
   campaignQuests: Quest[];
   campaignProgress: CampaignProgress | null;
   campaignReward: RewardCampaign | null;
-  leaderboard: LeaderboardUser[];
+  leaderboard: LeaderboardProps | null;
 
   // Loading states
   isLoadingCampaigns: boolean;
@@ -45,7 +45,7 @@ export const CampaignProvider: React.FC<CampaignProviderProps> = ({ children }) 
   const [campaignQuests, setCampaignQuests] = useState<Quest[]>([]);
   const [campaignProgress, setCampaignProgress] = useState<CampaignProgress | null>(null);
   const [campaignReward, setCampaignReward] = useState<RewardCampaign | null>(null);
-  const [leaderboard, setLeaderboard] = useState<LeaderboardUser[]>([]);
+  const [leaderboard, setLeaderboard] = useState<LeaderboardProps | null>(null);
 
   // Loading states
   const [isLoadingCampaigns, setIsLoadingCampaigns] = useState(true);

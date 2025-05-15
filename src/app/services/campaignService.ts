@@ -2,8 +2,8 @@ import {
   Campaign,
   CampaignDetail,
   CampaignProgress,
-  LeaderboardUser,
   RewardCampaign,
+  LeaderboardProps,
 } from '../types/campaign.types';
 import { Quest } from '../types/quests.types';
 import { generateRandomAddress } from '../utils/randomUserAddressGenerate';
@@ -40,19 +40,32 @@ export const CampaignService = {
   getCampaignReward: async (campaignId: number): Promise<RewardCampaign> =>
     mockApiRequest(mockRewardCampaign),
 
-  getMockLeaderboard: async (): Promise<LeaderboardUser[]> => {
-    const data = Array.from({ length: 50 }, (_, i) => ({
+  getMockLeaderboard: async (): Promise<LeaderboardProps> => {
+    const entries = Array.from({ length: 50 }, (_, i) => ({
       rank: i + 1,
       username: generateRandomAddress(),
       score: Math.floor(Math.random() * 5000) + 1000 + parseFloat((Math.random() * 200).toFixed(6)),
       totalPoints: Math.floor(Math.random() * 5000) + 1000,
     }));
 
-    data.sort((a, b) => b.score - a.score);
-    data.forEach((item, idx) => {
+    entries.sort((a, b) => b.score - a.score);
+    entries.forEach((item, idx) => {
       item.rank = idx + 1;
     });
 
-    return mockApiRequest(data);
+    // Add user rank information
+    const userRank = {
+      // isLocked: Math.random() > 0.5,
+      isLocked: true,
+      message:
+        Math.random() > 0.5
+          ? 'Complete at least 3 quests to unlock your rank'
+          : `You're ranked #${Math.floor(Math.random() * 50) + 1}`,
+    };
+
+    return mockApiRequest({
+      entries,
+      userRank,
+    });
   },
 };

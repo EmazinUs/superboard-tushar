@@ -46,9 +46,17 @@ export interface LeaderboardUser {
   totalPoints: number;
 }
 
+export interface LeaderboardProps {
+  entries: LeaderboardUser[];
+  userRank?: {
+    isLocked: boolean;
+    message: string;
+  };
+}
+
 export interface CampaignDetail extends Campaign {
   progress: CampaignProgress;
   reward: RewardCampaign;
   quests?: Quest[];
-  leaderboard?: LeaderboardUser[];
+  leaderboard?: LeaderboardProps;
 }

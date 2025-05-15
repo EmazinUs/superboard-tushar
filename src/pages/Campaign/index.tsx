@@ -7,6 +7,7 @@ import { ChevronLeft, Copy, Check } from 'lucide-react';
 import CampaignStats from '@/app/components/layout/CampaignStats';
 import SegmentControl from '@/app/components/common/segmentControl';
 import QuestCard from '@/app/components/common/questCard';
+import LeaderBoard from '@/app/components/layout/LeaderBoard';
 import questImage from '@/app/assets/quest_images/image_1.png';
 import coinBoxImage from '@/app/assets/coin-box.svg';
 import CampaignCard from '@/app/components/layout/CampaignCard';
@@ -16,8 +17,24 @@ const MOCK_CAMPAIGN_ID = 11;
 
 const CampaignPage: React.FC = () => {
   const [activeTab, setActiveTab] = React.useState('QUESTS');
+  const [copyStatus, setCopyStatus] = useState('idle');
 
-  const { selectedCampaign, campaignQuests, isLoadingDetails, selectCampaign } = useCampaign();
+  const { selectedCampaign, campaignQuests, leaderboard, isLoadingDetails, selectCampaign } =
+    useCampaign();
+
+  const handleCopyLink = useCallback(async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopyStatus('copied');
+
+      // Reset after 2 sec
+      setTimeout(() => {
+        setCopyStatus('idle');
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy URL:', err);
+    }
+  }, []);
 
   useEffect(() => {
     selectCampaign(MOCK_CAMPAIGN_ID);
@@ -63,8 +80,20 @@ const CampaignPage: React.FC = () => {
                 <ChevronLeft className="iconClass" /> ALL CAMPAIGNS
               </Link>
               <div className="campaign-actions">
-                <button className="share-button">
-                  <Copy className="iconClass" /> SHARE
+                <button
+                  className="share-button"
+                  onClick={handleCopyLink}
+                  aria-label="Share campaign"
+                >
+                  {copyStatus === 'idle' ? (
+                    <>
+                      <Copy size={16} className="iconClass" /> SHARE
+                    </>
+                  ) : (
+                    <>
+                      <Check size={16} className="iconClass" /> URL COPIED
+                    </>
+                  )}
                 </button>
               </div>
             </div>
@@ -79,21 +108,25 @@ const CampaignPage: React.FC = () => {
               onChange={setActiveTab}
             />
 
-            <div className="campaign-quests">
-              {(campaignQuests || []).map((quest, index) => (
-                <QuestCard
-                  key={quest.id || index}
-                  href={`/quests/${quest.id}`}
-                  backgroundImage={quest.imageUrl || questImage.src}
-                  coinIcon={coinBoxImage.src}
-                  rewardAmount={quest.rewardAmount}
-                  title={quest.title}
-                  tag={quest.tag || 'Quest'}
-                  chadsCount={`${quest.chadsCount || 0} CHADS`}
-                  boardLabel="SUPERBOARD"
-                />
-              ))}
-            </div>
+            {activeTab === 'QUESTS' ? (
+              <div className="campaign-quests">
+                {(campaignQuests || []).map((quest, index) => (
+                  <QuestCard
+                    key={quest.id || index}
+                    href={`/quests/${quest.id}`}
+                    backgroundImage={quest.imageUrl || questImage.src}
+                    coinIcon={coinBoxImage.src}
+                    rewardAmount={quest.rewardAmount}
+                    title={quest.title}
+                    tag={quest.tag || 'Quest'}
+                    chadsCount={`${quest.chadsCount || 0} CHADS`}
+                    boardLabel="SUPERBOARD"
+                  />
+                ))}
+              </div>
+            ) : (
+              leaderboard && <LeaderBoard {...leaderboard} />
+            )}
           </div>
         </div>
       </Container>

@@ -2,7 +2,7 @@
 import React from 'react';
 import './CampaignStats.scss';
 import CampaignStatsCard from '../../common/campaignStatsCard';
-import rewardProgressImage from '../../../assets/reward_progress_cat.png';
+import { rewardProgressCat } from '@/app/assets/exportData';
 import { useCampaign } from '@/app/context/campaignContext';
 
 interface CampaignStatsProps {
@@ -19,7 +19,7 @@ const CampaignStats: React.FC<CampaignStatsProps> = ({ className = '' }) => {
         title="REWARDS"
         value={`${campaignReward?.rewardAmount || 0} ${campaignReward?.rewardType || ''}`}
         description={campaignReward?.description || ''}
-        imageUrl={rewardProgressImage.src}
+        imageUrl={rewardProgressCat}
         isLoading={isLoadingDetails}
       />
 
@@ -28,7 +28,7 @@ const CampaignStats: React.FC<CampaignStatsProps> = ({ className = '' }) => {
         title="CAMPAIGN PROGRESS"
         value={`${campaignProgress?.completedQuests || 0}/${campaignProgress?.totalQuests || 0} Quests Completed`}
         description={`${campaignProgress?.completionPercentage || 0}% Complete - ${campaignProgress?.earnedPoints || 0} Points Earned`}
-        imageUrl={rewardProgressImage.src}
+        imageUrl={rewardProgressCat}
         isLoading={isLoadingDetails}
       />
     </div>

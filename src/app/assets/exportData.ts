@@ -22,6 +22,11 @@ import logoModal from './logo_modal.svg';
 import rariIcon from './rari.png';
 import rewardProgressCat from './reward_progress_cat.png';
 import streakHungryCat from './streak_hungry_cat.svg';
+import goldMedal from './leaderboard/goldMedal.svg';
+import silverMedal from './leaderboard/silverMedal.svg';
+import bronzeMedal from './leaderboard/bronze.svg';
+import globalIcon from './leaderboard/global.svg';
+import avatar from './leaderboard/avatar.svg';
 
 // Quest Image Array for easy access
 export const questImages = [
@@ -64,7 +69,18 @@ export {
 };
 
 // Export other assets
-export { coinBox, logoModal, rariIcon, rewardProgressCat, streakHungryCat };
+export {
+  coinBox,
+  logoModal,
+  rariIcon,
+  rewardProgressCat,
+  streakHungryCat,
+  goldMedal,
+  silverMedal,
+  bronzeMedal,
+  globalIcon,
+  avatar,
+};
 
 // Helper function to get quest image by index
 export const getQuestImage = (index: number) => {
