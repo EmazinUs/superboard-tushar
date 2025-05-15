@@ -1,3 +1,4 @@
+import { StaticImageData } from 'next/image';
 import { Quest } from './quests.types';
 
 export interface CampaignProgress {
@@ -15,7 +16,7 @@ export interface RewardCampaign {
   description: string;
   rewardAmount: number;
   rewardType: 'points' | 'tokens' | 'nft';
-  imageUrl: string;
+  imageUrl: string | StaticImageData;
   endDate: string;
 }
 
@@ -23,9 +24,9 @@ export interface Campaign {
   id: number;
   title: string;
   description: string;
-  imageUrl: string;
+  imageUrl: string | StaticImageData;
   chainName: string;
-  chainIcon: string;
+  chainIcon: string | StaticImageData;
   questCount: number;
   chadCount: number;
   status: 'active' | 'completed' | 'upcoming';

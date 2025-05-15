@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image';
+
 export type Task = {
   id: number;
   questId: number;
@@ -28,7 +30,7 @@ export type Quest = {
   id: number;
   title: string;
   description: string;
-  imageUrl: string;
+  imageUrl: string | StaticImageData;
   rewardAmount: number;
   tag?: string;
   tags?: string[];

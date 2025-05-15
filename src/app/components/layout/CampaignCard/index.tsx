@@ -4,18 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Globe, Twitter, ChevronDown, ChevronUp, Radio } from 'lucide-react';
 import './CampaignCard.scss';
-
-interface CampaignCardProps {
-  title: string;
-  description: string;
-  imageUrl: string;
-  liveStatus?: boolean;
-  questCount: number;
-  chadCount: number;
-  chainName: string;
-  chainIcon?: string;
-  reward?: string;
-}
+import { CampaignCardProps } from '@/app/types/global.types';
 
 const CampaignCard: React.FC<CampaignCardProps> = ({
   title,

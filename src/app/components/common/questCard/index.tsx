@@ -3,17 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import './questCard.scss';
 import Link from 'next/link';
-
-interface QuestCardProps {
-  href: string;
-  backgroundImage: string;
-  coinIcon: string;
-  rewardAmount: number;
-  title: string;
-  tag: string;
-  chadsCount: string;
-  boardLabel: string;
-}
+import { QuestCardProps } from '@/app/types/global.types';
 
 const QuestCard: React.FC<QuestCardProps> = ({
   href,

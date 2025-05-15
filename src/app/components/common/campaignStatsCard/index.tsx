@@ -3,15 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import './campaignStatsCard.scss';
 import { Tally5, Trophy } from 'lucide-react';
-
-interface CampaignStatsCardProps {
-  type: 'rewards' | 'progress';
-  title: string;
-  value: string;
-  description: string;
-  imageUrl: string;
-  isLoading?: boolean;
-}
+import { CampaignStatsCardProps } from '@/app/types/global.types';
 
 const CampaignStatsCard: React.FC<CampaignStatsCardProps> = ({
   type,
