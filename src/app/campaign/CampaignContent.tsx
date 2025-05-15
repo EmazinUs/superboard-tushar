@@ -30,7 +30,7 @@ const CampaignPage: React.FC = () => {
       // Reset after 2 sec
       setTimeout(() => {
         setCopyStatus('idle');
-      }, 2000);
+      }, 800);
     } catch (err) {
       console.error('Failed to copy URL:', err);
     }
@@ -120,7 +120,7 @@ const CampaignPage: React.FC = () => {
                     rewardAmount={quest.rewardAmount}
                     title={quest.title}
                     tag={quest.tag || 'Quest'}
-                    chadsCount={`${quest.chadsCount || 0} CHADS`}
+                    chadsCount={`${quest.chadsCount.toString() || 0} CHADS`}
                     boardLabel="SUPERBOARD"
                   />
                 ))}

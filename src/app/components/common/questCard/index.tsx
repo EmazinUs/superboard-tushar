@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import './questCard.scss';
 import { QuestCardProps } from '@/app/types/global.types';
+import { formatNumberToK } from '@/app/utils/dataFormat';
 
 const QuestCard: React.FC<QuestCardProps> = ({
   href = '#',
@@ -30,7 +31,7 @@ const QuestCard: React.FC<QuestCardProps> = ({
         <h3 className="title">{title}</h3>
         <span className="quest-tag">{tag}</span>
         <div className="meta">
-          <span className="chads">{chadsCount}</span>
+          <span className="chads">{formatNumberToK(chadsCount)}</span>
           <span className="board">{boardLabel}</span>
         </div>
       </div>

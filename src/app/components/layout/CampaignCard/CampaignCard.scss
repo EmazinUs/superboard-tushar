@@ -4,7 +4,7 @@
 .campaign-card {
   @include flex-column;
   width: 100%;
-  max-width: 420px;
+  max-width: 380px;
   overflow: hidden;
   transition: all $transition-normal ease;
 
@@ -130,7 +130,7 @@
   &-info {
     @include flex-column;
     gap: $spacing-3;
-    padding: $spacing-4;
+    padding: $spacing-4 0;
   }
 
   &-type {
@@ -211,7 +211,7 @@
 }
 
 .campaign-reward {
-  display: flex;
+  display: none;
   align-items: center;
   gap: $spacing-2;
   background-color: rgba($color-accent-gold, 0.1);
@@ -222,8 +222,8 @@
   max-width: fit-content;
   margin-bottom: $spacing-2;
 
-  @media (max-width: #{$breakpoint-md}) {
-    display: none;
+  @media (max-width: #{$breakpoint-sm}) {
+    display: flex;
   }
 }
 

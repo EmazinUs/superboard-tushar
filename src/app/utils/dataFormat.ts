@@ -9,3 +9,13 @@ export const formatScore = (score: number) =>
   });
 
 export const formatPoints = (points: number) => points.toLocaleString();
+
+export const formatNumberToK = (number: string): string => {
+  const num = parseFloat(number);
+
+  if (isNaN(num)) return '0';
+  if (Math.abs(num) < 1000) return num.toString();
+
+  const k = num / 1000;
+  return k >= 1000 ? `${(k / 1000).toFixed(1)} M` : `${k.toFixed(1)} K`;
+};
