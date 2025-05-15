@@ -1,0 +1,128 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.quest {
+  $self: &;
+
+  &-link {
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &-card {
+    position: relative;
+    @include flex-column;
+    overflow: hidden;
+    margin-bottom: $spacing-6;
+    height: 100%;
+    background: transparent;
+    transition: transform $transition-normal ease;
+
+    .image {
+      &-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: $border-radius-xl;
+      }
+
+      &-background {
+        object-fit: cover;
+        transition: transform $transition-normal ease;
+      }
+    }
+
+    .reward {
+      &-tag {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        @include flex-center;
+        width: fit-content;
+        padding: 0 $spacing-4;
+        z-index: 1;
+      }
+
+      &-badge {
+        @include flex-center;
+        gap: $spacing-2;
+        width: 100px;
+        padding: $spacing-1 $spacing-4;
+        border-radius: $border-radius-lg;
+        background-color: $color-brand-green;
+        border: 3px solid $color-background-primary;
+      }
+
+      &-text {
+        font-weight: 600;
+        color: $color-background-primary;
+        font-size: $font-size-base;
+      }
+    }
+
+    .coin-icon {
+      width: 40px;
+      height: auto;
+    }
+
+    .card-content {
+      margin-top: $spacing-6;
+      @include flex-column;
+      gap: $spacing-2;
+      flex: 1;
+
+      .title {
+        font-size: $font-size-md;
+        font-weight: 600;
+        color: $color-text-title;
+        line-height: 1.4;
+        min-height: 2.8em;
+        transition: color $transition-fast ease;
+        @include multi-line-truncate(2);
+      }
+
+      .meta {
+        @include flex-between;
+        font-weight: 600;
+        color: $color-text-secondary;
+
+        .chads,
+        .board {
+          font-weight: 500;
+          letter-spacing: 0.025em;
+        }
+
+        .chads {
+          font-size: $font-size-xs;
+        }
+
+        .board {
+          font-size: $font-size-sm;
+        }
+      }
+    }
+
+    #{$self}-tag {
+      background-color: $color-background-secondary;
+      color: $color-text-secondary;
+      font-size: $font-size-xs;
+      padding: $spacing-1 $spacing-2;
+      border-radius: $border-radius-md;
+      font-weight: 600;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    &:hover {
+      .image-background {
+        transform: scale(1.05);
+      }
+
+      .title {
+        color: $color-text-primary;
+      }
+    }
+  }
+}
