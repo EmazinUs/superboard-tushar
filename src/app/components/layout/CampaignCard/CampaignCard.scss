@@ -265,14 +265,24 @@
 }
 
 .stat {
+  @include flex-column;
+  align-items: center;
   min-width: 60px;
+  border: 1px solid $color-background-search;
+  border-radius: $border-radius-md;
 
   &-label {
+    width: 100%;
+    text-align: center;
+    background: $color-background-search;
     font-size: $font-size-xs;
     color: $color-text-tertiary;
     margin-bottom: $spacing-1;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    padding: $spacing-1 $spacing-6;
+    border-top-left-radius: $border-radius-md;
+    border-top-right-radius: $border-radius-md;
   }
 
   &-value {

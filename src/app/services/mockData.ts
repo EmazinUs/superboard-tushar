@@ -5,6 +5,7 @@ import {
   RewardCampaign,
 } from '../types/campaign.types';
 import { rariIcon, rewardProgressCat } from '../assets/exportData';
+import { quest1 } from '../assets/exportData';
 
 export const mockCampaignProgress: CampaignProgress = {
   completedQuests: 8,
@@ -31,7 +32,7 @@ export const mockCampaign: Campaign = {
   title: 'Assemble on Soneium',
   description:
     'Swap, stake, bridge, and mint your way to the top! Complete quests, stack SUPR points, and climb the leaderboard to claim your share of $25,000 in rewards.',
-  imageUrl: rewardProgressCat,
+  imageUrl: quest1,
   chainName: 'Soneium',
   chainIcon: rariIcon,
   questCount: 26,
