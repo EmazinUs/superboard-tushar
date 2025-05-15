@@ -26,35 +26,12 @@ export type Task = {
 
 export type Quest = {
   id: number;
-  name: string;
-  slug: string;
+  title: string;
   description: string;
-  constraints: {
-    methods: string[];
-    maximumAmountOfPlayers: number;
-  };
-  completionRules: object;
-  uiProperties: {
-    image: string;
-    level: number;
-    headerImage: string;
-    primaryColor: string;
-    secondaryColor: string;
-  };
-  entitiesId: number[];
-  reward: object;
-  rewardPoints: number;
-  estimatedTime: number;
-  startTime: string;
-  endTime: string;
-  createdAt: string;
-  updatedAt: string;
-  createdBy: number;
-  modifiedBy: number;
-  isActive: boolean;
-  tags: string[];
-  _count: {
-    userQuest: number;
-  };
+  imageUrl: string;
+  rewardAmount: number;
+  tag?: string;
+  tags?: string[];
+  chadsCount: number;
   tasks: Task[];
 };

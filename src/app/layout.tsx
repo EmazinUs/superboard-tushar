@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import '../app/styles/globals.scss';
+import { CampaignProvider } from './context/campaignContext';
 
 export const metadata: Metadata = {
   title: 'SuperBoard | Harshvardhan',
@@ -13,7 +14,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <CampaignProvider>{children}</CampaignProvider>
+      </body>
     </html>
   );
 }

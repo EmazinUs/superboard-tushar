@@ -1,34 +1,54 @@
-export type RewardCampaign = {
-  rewardTitle: string;
-  rewardDescription: string;
-  startTime: string;
-  endTime: string;
-};
+import { Quest } from './quests.types';
 
-export type LeaderboardUser = {
+export interface CampaignProgress {
+  completedQuests: number;
+  totalQuests: number;
+  earnedPoints: number;
+  totalPoints: number;
+  completionPercentage: number;
+  status: 'not_started' | 'in_progress' | 'completed';
+}
+
+export interface RewardCampaign {
+  id: number;
+  title: string;
+  description: string;
+  rewardAmount: number;
+  rewardType: 'points' | 'tokens' | 'nft';
+  imageUrl: string;
+  endDate: string;
+}
+
+export interface Campaign {
+  id: number;
+  title: string;
+  description: string;
+  imageUrl: string;
+  chainName: string;
+  chainIcon: string;
+  questCount: number;
+  chadCount: number;
+  status: 'active' | 'completed' | 'upcoming';
+  startDate: string;
+  endDate: string;
+  isLive: boolean;
+  socialLinks: {
+    website?: string;
+    twitter?: string;
+    discord?: string;
+  };
+}
+
+export interface LeaderboardUser {
   rank: number;
   username: string;
   score: number;
   totalPoints: number;
-};
+}
 
-export type Campaign = {
-  id: number;
-  title: string;
-  slug: string;
-  hasLeaderboard: boolean;
-  isActive: boolean;
-  description: string;
-  uiProperties: {
-    primaryColor: string;
-    secondaryColor: string;
-    images: string;
-  };
-  socialMediaAccounts: {
-    twitter: string;
-    website: string;
-  };
-  totalQuests: number;
-  chads: number;
-  chain: string;
-};
+export interface CampaignDetail extends Campaign {
+  progress: CampaignProgress;
+  reward: RewardCampaign;
+  quests?: Quest[];
+  leaderboard?: LeaderboardUser[];
+}

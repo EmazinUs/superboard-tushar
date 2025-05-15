@@ -1,6 +1,23 @@
 import { Quest, Task } from '../types/quests.types';
-
 const now = () => new Date().toISOString();
+
+export const createDummyQuest = (index: number): Quest => {
+  const taskCount = 5;
+  const tasks: Task[] = Array.from({ length: taskCount }, (_, i) =>
+    createDummyTask(i + 1, index + 1, i)
+  );
+
+  return {
+    id: index + 1,
+    title: `Quest ${index + 1}: ${tasks[0].name}`,
+    description: 'Complete this quest to earn rewards and climb the leaderboard!',
+    imageUrl: questImage.src,
+    rewardAmount: Math.floor(Math.random() * 100) + 50,
+    tag: 'Quest',
+    chadsCount: Math.floor(Math.random() * 10000) + 1000,
+    tasks,
+  };
+};
 
 const createDummyTask = (id: number, questId: number, displayPosition: number): Task => {
   const names = [
@@ -30,43 +47,5 @@ const createDummyTask = (id: number, questId: number, displayPosition: number): 
     updatedAt: now(),
     createdBy: 1,
     modifiedBy: 1,
-  };
-};
-
-export const createDummyQuest = (index: number): Quest => {
-  const id = 1400 + index;
-  return {
-    id,
-    name: `Assemble on Soneium ${index + 1}`,
-    slug: `assemble-on-soneium-${index + 1}`,
-    description: 'Ethereum layer-2 solution to empower builders and drive Web3 adoption.',
-    constraints: {
-      methods: ['constraintMaxAmountOfPlayersService'],
-      maximumAmountOfPlayers: 1000000,
-    },
-    completionRules: {},
-    uiProperties: {
-      image: 'https://cdn.superboard.xyz/uiProperties/images/newsol.png',
-      level: 1,
-      headerImage: 'https://cdn.superboard.xyz/uiProperties/seo/camps.png',
-      primaryColor: '#b2ffa4',
-      secondaryColor: '#000000',
-    },
-    entitiesId: [29, 1047, 1048],
-    reward: {},
-    rewardPoints: 50,
-    estimatedTime: 3,
-    startTime: now(),
-    endTime: now(),
-    createdAt: now(),
-    updatedAt: now(),
-    createdBy: 65191,
-    modifiedBy: 65191,
-    isActive: true,
-    tags: [],
-    _count: {
-      userQuest: Math.floor(Math.random() * 15000),
-    },
-    tasks: Array.from({ length: 5 }, (_, i) => createDummyTask(id * 10 + i, id, i)),
   };
 };

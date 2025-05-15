@@ -1,0 +1,31 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.campaign-stats {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 16px;
+  margin-bottom: 24px;
+
+  @media (min-width: 768px) and (max-width: 1023px) {
+    flex-direction: row;
+    gap: 20px;
+  }
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    gap: 24px;
+  }
+
+  .error-message {
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 8px;
+  }
+}

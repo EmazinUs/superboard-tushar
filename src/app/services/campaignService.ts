@@ -1,41 +1,58 @@
-import { Campaign, LeaderboardUser, RewardCampaign } from '../types/campaign.types';
+import {
+  Campaign,
+  CampaignDetail,
+  CampaignProgress,
+  LeaderboardUser,
+  RewardCampaign,
+} from '../types/campaign.types';
 import { Quest } from '../types/quests.types';
 import { generateRandomAddress } from '../utils/randomUserAddressGenerate';
 import { mockApiRequest } from './api';
-import { mockCampaigns, mockRewardCampaign } from './mockData';
+import {
+  mockCampaign,
+  mockCampaignDetail,
+  mockCampaignProgress,
+  mockRewardCampaign,
+} from './mockData';
 import { createDummyQuest } from './questDataGenerate';
 
 export const CampaignService = {
+  getCampaignById: async (id: number): Promise<CampaignDetail> =>
+    mockApiRequest(mockCampaignDetail),
+
+  getCampaigns: async (): Promise<Campaign[]> => {
+    const campaigns = Array.from({ length: 5 }, (_, i) => ({
+      ...mockCampaign,
+      id: i + 1,
+      title: `${mockCampaign.title} ${i + 1}`,
+    }));
+    return mockApiRequest(campaigns);
+  },
+
   getCampaignQuests: async (campaignId: number): Promise<Quest[]> => {
-    const mockQuests: Quest[] = Array.from({ length: 12 }, (_, i) => createDummyQuest(i));
+    const mockQuests = Array.from({ length: 12 }, (_, i) => createDummyQuest(i));
     return mockApiRequest(mockQuests);
   },
 
-  getRewardCampaign: async (): Promise<RewardCampaign> => mockApiRequest(mockRewardCampaign),
+  getCampaignProgress: async (campaignId: number): Promise<CampaignProgress> =>
+    mockApiRequest(mockCampaignProgress),
 
-  getCampaigns: async (): Promise<Campaign> => mockApiRequest(mockCampaigns),
+  getCampaignReward: async (campaignId: number): Promise<RewardCampaign> =>
+    mockApiRequest(mockRewardCampaign),
 
   getMockLeaderboard: async (): Promise<LeaderboardUser[]> => {
-    const data: LeaderboardUser[] = Array.from({ length: 50 }, (_, i) => {
-      const totalPoints = Math.floor(Math.random() * 5000) + 1000;
-      const score = totalPoints + parseFloat((Math.random() * 200).toFixed(6));
+    const data = Array.from({ length: 50 }, (_, i) => ({
+      rank: i + 1,
+      username: generateRandomAddress(),
+      score: Math.floor(Math.random() * 5000) + 1000 + parseFloat((Math.random() * 200).toFixed(6)),
+      totalPoints: Math.floor(Math.random() * 5000) + 1000,
+    }));
 
-      return {
-        rank: i + 1,
-        username: generateRandomAddress(),
-        score,
-        totalPoints,
-      };
-    });
-
-    // Sort by score descending
     data.sort((a, b) => b.score - a.score);
-
-    // Assign correct rank after sort
     data.forEach((item, idx) => {
       item.rank = idx + 1;
     });
 
-    return new Promise(resolve => setTimeout(() => resolve(data), 300));
+    return mockApiRequest(data);
   },
 };
