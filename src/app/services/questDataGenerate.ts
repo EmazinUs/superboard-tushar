@@ -15,7 +15,7 @@ export const createDummyQuest = (index: number): Quest => {
 
   return {
     id: index + 1,
-    title: `Quest ${index + 1}: ${tasks[0].name} to ${tasks[tasks.length - 1].name}`,
+    title: `Quest ${index + 1} ${tasks[0].name} to ${tasks[tasks.length - 1].name}`,
     description: 'Complete this quest to earn rewards and climb the leaderboard!',
     imageUrl: questImage.src,
     rewardAmount: Math.floor(Math.random() * 100) + 50,

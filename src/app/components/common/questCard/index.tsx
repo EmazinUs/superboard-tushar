@@ -4,9 +4,10 @@ import Image from 'next/image';
 import './questCard.scss';
 import { QuestCardProps } from '@/app/types/global.types';
 import { formatNumberToK } from '@/app/utils/dataFormat';
+import Link from 'next/link';
 
 const QuestCard: React.FC<QuestCardProps> = ({
-  href = '#',
+  href,
   backgroundImage: backgroundImage,
   coinIcon,
   rewardAmount,
@@ -15,7 +16,7 @@ const QuestCard: React.FC<QuestCardProps> = ({
   chadsCount,
   boardLabel,
 }) => (
-  <div className="quest-link">
+  <Link href={href.toLowerCase().replace(/\s+/g, '-')} className="quest-link">
     <div className="quest-card">
       <div className="image-wrapper">
         <Image src={backgroundImage} alt="Quest Background" fill className={'image-background'} />
@@ -36,7 +37,7 @@ const QuestCard: React.FC<QuestCardProps> = ({
         </div>
       </div>
     </div>
-  </div>
+  </Link>
 );
 
 export default QuestCard;

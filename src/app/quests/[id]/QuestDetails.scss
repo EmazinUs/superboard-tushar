@@ -1,0 +1,163 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.quest-details {
+  &-page {
+    min-height: calc(100vh - 80px); // Account for navbar height
+    padding-top: calc($spacing-8 + 80px); // Add padding for navbar
+    padding-bottom: $spacing-8;
+    background-color: $color-background-primary;
+    color: $color-text-secondary;
+
+    @include mobile {
+      padding-top: calc($spacing-4 + 80px);
+      padding-bottom: $spacing-4;
+    }
+  }
+
+  &-content {
+    @include flex-column;
+    gap: $spacing-6;
+  }
+}
+
+.quest {
+  &-header {
+    @include flex-between;
+    margin-bottom: $spacing-6;
+
+    .back-link {
+      @include flex-center;
+      color: $color-text-secondary;
+      text-decoration: none;
+      font-size: $font-size-sm;
+      font-weight: 500;
+      transition: color $transition-fast ease;
+
+      &:hover {
+        color: $color-text-primary;
+      }
+
+      .icon {
+        width: 1rem;
+        height: 1rem;
+        margin-right: $spacing-1;
+      }
+    }
+  }
+
+  &-main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: $spacing-8;
+    align-items: start;
+
+    @include tablet {
+      grid-template-columns: 1fr;
+      gap: $spacing-6;
+    }
+  }
+
+  &-image {
+    &-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1;
+      border-radius: $border-radius-xl;
+      overflow: hidden;
+    }
+
+    object-fit: cover;
+  }
+
+  &-reward {
+    position: absolute;
+    bottom: $spacing-4;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .reward-badge {
+      @include flex-center;
+      gap: $spacing-2;
+      background-color: $color-brand-green;
+      padding: $spacing-2 $spacing-4;
+      border-radius: $border-radius-lg;
+      border: 3px solid $color-background-primary;
+    }
+
+    .reward-amount {
+      color: $color-background-primary;
+      font-weight: 600;
+    }
+  }
+
+  &-info {
+    @include flex-column;
+    gap: $spacing-6;
+  }
+
+  &-title {
+    font-size: $font-size-3xl;
+    font-weight: 700;
+    color: $color-text-primary;
+    margin: 0;
+
+    @include mobile {
+      font-size: $font-size-2xl;
+    }
+  }
+
+  &-description {
+    font-size: $font-size-lg;
+    line-height: 1.6;
+    color: $color-text-secondary;
+  }
+
+  &-section {
+    @include flex-column;
+    gap: $spacing-4;
+
+    h2 {
+      font-size: $font-size-xl;
+      font-weight: 600;
+      color: $color-text-primary;
+      margin: 0;
+    }
+  }
+}
+
+.completion-steps,
+.requirements-list {
+  @include flex-column;
+  gap: $spacing-3;
+  margin: 0;
+  padding-left: $spacing-6;
+
+  li {
+    color: $color-text-secondary;
+    font-size: $font-size-base;
+    line-height: 1.6;
+
+    &::marker {
+      color: $color-text-purple;
+    }
+  }
+}
+
+.start-quest-btn {
+  background-color: $color-text-purple;
+  color: $color-text-primary;
+  border: none;
+  border-radius: $border-radius-lg;
+  padding: $spacing-4 $spacing-8;
+  font-size: $font-size-lg;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity $transition-fast ease;
+  align-self: flex-start;
+  margin-top: $spacing-4;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}

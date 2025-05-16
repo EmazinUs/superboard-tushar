@@ -114,7 +114,7 @@ const CampaignPage: React.FC = () => {
                 {(campaignQuests || []).map((quest, index) => (
                   <QuestCard
                     key={quest.id || index}
-                    href={`/quests/${quest.id}`}
+                    href={`/quests/${quest.title}` || '#'}
                     backgroundImage={quest.imageUrl || questImage.src}
                     coinIcon={coinBoxImage.src}
                     rewardAmount={quest.rewardAmount}
