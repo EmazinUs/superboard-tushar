@@ -34,6 +34,8 @@ export interface QuestCardProps {
   tag: string;
   chadsCount: string;
   boardLabel: string;
+  isQuestStarted?: boolean;
+  isQuestCompleted?: boolean;
 }
 
 export interface SegmentControlProps {

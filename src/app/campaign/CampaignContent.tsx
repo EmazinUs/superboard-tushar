@@ -76,7 +76,7 @@ const CampaignPage: React.FC = () => {
 
           <div className="campaign-right">
             <div className="campaign-header">
-              <Link href="/campaigns" className="back-link">
+              <Link href="/campaign" className="back-link">
                 <ChevronLeft className="iconClass" /> ALL CAMPAIGNS
               </Link>
               <div className="campaign-actions">
@@ -122,6 +122,8 @@ const CampaignPage: React.FC = () => {
                     tag={quest.tag || 'Quest'}
                     chadsCount={`${quest.chadsCount.toString() || 0} CHADS`}
                     boardLabel="SUPERBOARD"
+                    isQuestStarted={quest.isQuestStarted}
+                    isQuestCompleted={quest.isCompleted}
                   />
                 ))}
               </div>

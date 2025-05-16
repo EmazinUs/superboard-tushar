@@ -20,6 +20,42 @@
     background: transparent;
     transition: transform $transition-normal ease;
 
+    // Completed state styles
+    &--completed {
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          rgba($color-accent-purple, 0.05),
+          rgba($color-brand-green, 0.05)
+        );
+        border-radius: $border-radius-xl;
+        pointer-events: none;
+      }
+
+      .image-background {
+        filter: brightness(1.1);
+      }
+
+      .title {
+        display: flex;
+        align-items: center;
+        gap: $spacing-2;
+
+        .title-completion-icon {
+          color: $color-brand-green;
+          margin-left: $spacing-2;
+        }
+      }
+    }
+
     .image {
       &-wrapper {
         position: relative;
@@ -31,6 +67,26 @@
         object-fit: cover;
         border-radius: $border-radius-xl;
         transition: transform $transition-normal ease;
+      }
+    }
+
+    .completion-badge {
+      position: absolute;
+      top: $spacing-3;
+      right: $spacing-3;
+      display: flex;
+      align-items: center;
+      gap: $spacing-1;
+      padding: $spacing-1 $spacing-2;
+      background-color: rgba($color-brand-green, 0.9);
+      color: $color-background-primary;
+      border-radius: $border-radius-full;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      z-index: 5;
+
+      svg {
+        color: $color-background-primary;
       }
     }
 
@@ -82,6 +138,11 @@
         min-height: 2.8em;
         transition: color $transition-fast ease;
         @include multi-line-truncate(2);
+
+        .title-completion-icon {
+          color: $color-brand-green;
+          flex-shrink: 0;
+        }
       }
 
       .meta {
@@ -94,6 +155,34 @@
           font-weight: 500;
           letter-spacing: 0.025em;
           font-size: $font-size-sm;
+        }
+
+        .in-progress {
+          display: flex;
+          align-items: center;
+          gap: $spacing-2;
+          color: $color-accent-gold;
+          font-weight: $font-weight-medium;
+
+          svg {
+            animation: spin 2s linear infinite;
+          }
+
+          span {
+            font-size: $font-size-sm;
+          }
+        }
+
+        .completed {
+          display: flex;
+          align-items: center;
+          gap: $spacing-2;
+          color: $color-brand-green;
+          font-weight: $font-weight-medium;
+
+          span {
+            font-size: $font-size-sm;
+          }
         }
       }
     }
@@ -118,5 +207,14 @@
         color: $color-text-primary;
       }
     }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

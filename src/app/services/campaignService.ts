@@ -16,6 +16,18 @@ import {
 } from './mockData';
 import { createDummyQuest } from './questDataGenerate';
 
+// Helper function to reset all progress data in localStorage (for testing only)
+export const resetAllProgress = () => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('startedQuests');
+    localStorage.removeItem('tasksProgress');
+    console.log('All progress data has been reset for testing');
+  }
+};
+
+// Uncomment to reset progress data when app loads
+// setTimeout(() => resetAllProgress(), 2000);
+
 export const CampaignService = {
   getCampaignById: async (id: number): Promise<CampaignDetail> =>
     mockApiRequest(mockCampaignDetail),

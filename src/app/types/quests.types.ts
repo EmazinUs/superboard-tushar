@@ -45,3 +45,8 @@ export type Quest = {
   isCompleted: boolean;
   isQuestStarted: boolean;
 };
+
+export interface TaskModalState {
+  isOpen: boolean;
+  taskId: number | null;
+}
