@@ -1,13 +1,29 @@
-@import 'variables';
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
 
-.quest-container {
+// Variables
+:root {
+  --skeleton-bg: rgba(255, 255, 255, 0.1);
+  --skeleton-shine: rgba(255, 255, 255, 0.05);
+  --skeleton-shine-mid: rgba(255, 255, 255, 0.1);
+  --skeleton-animation-duration: 2s;
+}
+
+.skeleton-quest-container {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
-  font-family: 'Inter', sans-serif;
-  color: #ffffff;
-  background-color: #0a0a0a;
+  padding: $spacing-4;
+  font-family: $font-family-primary;
+  color: var(--text-primary);
+  background-color: var(--background-dark);
+
+  // Skeleton animation
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
 
   &.skeleton {
     .skeleton-item {
@@ -17,33 +33,29 @@
       &::after {
         content: '';
         position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
+        inset: 0;
         transform: translateX(-100%);
         background-image: linear-gradient(
           90deg,
-          rgba(255, 255, 255, 0) 0,
-          rgba(255, 255, 255, 0.05) 20%,
-          rgba(255, 255, 255, 0.1) 60%,
-          rgba(255, 255, 255, 0)
+          transparent 0,
+          var(--skeleton-shine) 20%,
+          var(--skeleton-shine-mid) 60%,
+          transparent
         );
-        animation: shimmer 2s infinite;
+        animation: shimmer var(--skeleton-animation-duration) infinite;
       }
     }
 
-    @keyframes shimmer {
-      100% {
-        transform: translateX(100%);
-      }
+    // Base skeleton elements
+    %skeleton-base {
+      background-color: var(--skeleton-bg);
     }
 
     .skeleton-text {
-      height: 1rem;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 4px;
-      margin: 0.25rem 0;
+      @extend %skeleton-base;
+      height: $font-size-base;
+      border-radius: $border-radius-sm;
+      margin: $spacing-1 0;
 
       &.skeleton-text-short {
         width: 80px;
@@ -64,25 +76,25 @@
     }
 
     .skeleton-title {
-      height: 2rem;
+      @extend %skeleton-base;
+      height: $font-size-2xl;
       width: 280px;
-      background-color: rgba(255, 255, 255, 0.1);
-      border-radius: 6px;
-      margin: 1rem 0;
+      border-radius: $border-radius-md;
+      margin: $spacing-4 0;
     }
 
     .skeleton-circle {
+      @extend %skeleton-base;
       width: 2rem;
       height: 2rem;
       border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.1);
     }
 
     .skeleton-circle-sm {
+      @extend %skeleton-base;
       width: 1.25rem;
       height: 1.25rem;
       border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.1);
     }
 
     .skeleton-circles-group {
@@ -128,56 +140,55 @@
   }
 }
 
-.quest-content {
+.skeleton-quest-content {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: $spacing-6;
 }
 
-.rewards-bar {
-  background-color: rgba(30, 30, 30, 0.8);
-  border-radius: 12px;
-  padding: 0.75rem 1rem;
+.skeleton-rewards-bar {
+  background-color: var(--card-bg-dark);
+  border-radius: $border-radius-lg;
+  padding: $spacing-3 $spacing-4;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.rewards-count {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: rgba(50, 50, 50, 0.5);
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-weight: 500;
+.skeleton-rewards-count {
+  @include flex-center;
+  gap: $spacing-2;
+  background-color: var(--card-bg-darker);
+  padding: $spacing-1 $spacing-3;
+  border-radius: $border-radius-full;
+  font-weight: $font-weight-medium;
 
   .rewards-icon {
-    height: 1.25rem;
+    height: $font-size-xl;
     width: auto;
   }
 }
 
-.main-content {
+.skeleton-main-content {
   display: flex;
-  gap: 1.5rem;
+  gap: $spacing-6;
 
-  @media (max-width: 768px) {
+  @media (max-width: $breakpoint-md) {
     flex-direction: column-reverse;
   }
 }
 
-.info-section {
+.skeleton-info-section {
   flex: 1;
-  background-color: rgba(30, 30, 30, 0.8);
-  border-radius: 12px;
-  padding: 1.5rem;
+  background-color: var(--card-bg-dark);
+  border-radius: $border-radius-lg;
+  padding: $spacing-6;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: $spacing-6;
 }
 
-.header {
+.skeleton-header {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -189,7 +200,7 @@
   }
 }
 
-.superboard {
+.skeleton-superboard {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -201,31 +212,31 @@
   }
 }
 
-.welcome-text {
+.skeleton-welcome-text {
   font-size: 1rem;
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.7);
   margin: 0.5rem 0 1rem;
 }
 
-.stats {
+.skeleton-stats {
   display: flex;
   align-items: center;
   gap: 1.5rem;
   margin-top: 0.5rem;
 }
 
-.stat-item {
+.skeleton-stat-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.9rem;
 }
 
-.stat-icons {
+.skeleton-stat-icons {
   display: flex;
 
-  .user-icon {
+  .skeleton-user-icon {
     margin-left: -0.3rem;
     &:first-child {
       margin-left: 0;
@@ -233,13 +244,13 @@
   }
 }
 
-.divider {
+.skeleton-divider {
   height: 24px;
   width: 1px;
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.difficulty-indicator {
+.skeleton-difficulty-indicator {
   display: flex;
   align-items: center;
   width: 2rem;
@@ -248,7 +259,7 @@
   border-radius: 3px;
   overflow: hidden;
 
-  .difficulty-bar {
+  .skeleton-difficulty-bar {
     height: 100%;
     width: 35%;
     background-color: #4caf50;
@@ -256,7 +267,7 @@
   }
 }
 
-.chain-icon {
+.skeleton-chain-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -264,70 +275,68 @@
   font-size: 1.2rem;
 }
 
-.mission-section {
-  background-color: rgba(20, 20, 20, 0.8);
-  border-radius: 12px;
-  padding: 1.5rem;
+.skeleton-mission-section {
+  background-color: var(--card-bg-darker);
+  border-radius: $border-radius-lg;
+  padding: $spacing-6;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: $spacing-6;
 }
 
-.mission-header {
+.skeleton-mission-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
     margin: 0;
   }
 
-  .progress-text {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
+  .skeleton-progress-text {
+    font-size: $font-size-sm;
+    color: var(--text-secondary);
   }
 }
 
-.progress-bar {
+.skeleton-progress-bar {
   display: flex;
-  gap: 0.25rem;
-  margin-bottom: 1rem;
+  gap: $spacing-1;
 }
 
-.progress-segment {
+.skeleton-progress-segment {
   flex: 1;
   height: 4px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 2px;
+  background-color: var(--progress-bg);
+  border-radius: $border-radius-sm;
 
   &.completed {
-    background-color: #4caf50;
+    background-color: var(--accent-color);
   }
 }
 
-.mission-steps {
+.skeleton-mission-steps {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: $spacing-4;
 }
 
-.mission-step {
+.skeleton-mission-step {
   display: flex;
   align-items: center;
-  padding: 1rem;
-  background-color: rgba(40, 40, 40, 0.8);
-  border-radius: 8px;
-  gap: 1rem;
-  transition: background-color 0.2s;
+  padding: $spacing-4;
+  background-color: var(--step-bg);
+  border-radius: $border-radius-md;
+  gap: $spacing-4;
 
   &:hover {
-    background-color: rgba(50, 50, 50, 0.8);
+    background-color: var(--step-hover-bg);
   }
 
   &.completed {
-    border-left: 3px solid #4caf50;
+    border-left: 3px solid var(--accent-color);
   }
 
   &.locked {
@@ -335,87 +344,73 @@
   }
 }
 
-.step-number {
+.skeleton-step-number {
   width: 1.5rem;
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 500;
+  color: var(--text-secondary);
+  font-weight: $font-weight-medium;
 }
 
-.step-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.skeleton-step-icon {
+  @include flex-center;
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  font-size: 1.25rem;
+  background-color: var(--skeleton-bg);
+  font-size: $font-size-xl;
 
-  .x-icon {
-    font-size: 1rem;
-    font-weight: bold;
+  .skeleton-x-icon {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
   }
 }
 
-.step-title {
+.skeleton-step-title {
   flex: 1;
-  font-weight: 500;
+  font-weight: $font-weight-medium;
 }
 
-.step-status {
+.skeleton-step-status {
   .lock-icon {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-secondary);
   }
 
   .check-icon {
-    color: #4caf50;
-    font-weight: bold;
+    color: var(--accent-color);
+    font-weight: $font-weight-bold;
   }
 
   .pending-icon {
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--text-secondary);
+    opacity: 0.3;
   }
 }
 
-.game-image {
+.skeleton-game-image {
   width: 360px;
   height: 360px;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: $border-radius-lg;
   flex-shrink: 0;
-  background-color: #000000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: var(--background-dark);
+  @include flex-center;
 
-  @media (max-width: 768px) {
+  @media (max-width: $breakpoint-md) {
     width: 100%;
     height: auto;
-    margin-bottom: 1rem;
+    margin-bottom: $spacing-4;
     min-height: 200px;
-
-    .game-thumbnail {
-      width: 100%;
-      height: auto;
-    }
   }
 }
 
-.game-thumbnail {
+// Component-specific mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin responsive-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-// Dark mode variables
-:root {
-  --background-dark: #0a0a0a;
-  --card-bg-dark: rgba(30, 30, 30, 0.8);
-  --card-bg-darker: rgba(20, 20, 20, 0.8);
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --accent-color: #4caf50;
-  --progress-bg: rgba(255, 255, 255, 0.1);
-  --step-bg: rgba(40, 40, 40, 0.8);
-  --step-hover-bg: rgba(50, 50, 50, 0.8);
 }

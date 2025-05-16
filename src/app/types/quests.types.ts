@@ -10,6 +10,9 @@ export type Task = {
   category: 'WEB2_ACTION' | 'WEB3_ACTION';
   displayPosition: number;
   optional: number;
+  isOpen: boolean;
+  isCompleted: boolean;
+  taskIcon: string;
   createdAt: string;
   updatedAt: string;
   createdBy: number;
@@ -31,9 +34,14 @@ export type Quest = {
   title: string;
   description: string;
   imageUrl: string | StaticImageData;
+  chainIcon: string | StaticImageData;
   rewardAmount: number;
   tag?: string;
   tags?: string[];
   chadsCount: number;
   tasks: Task[];
+  totalTasks: number;
+  completedTasks: number;
+  isCompleted: boolean;
+  isQuestStarted: boolean;
 };

@@ -6,87 +6,188 @@ import { ChevronLeft } from 'lucide-react';
 import Image from 'next/image';
 import './QuestDetails.scss';
 import { useParams } from 'next/navigation';
+import { useCampaign } from '@/app/context/campaignContext';
+import coinBoxImage from '@/app/assets/coin-box.svg';
+import QuestSkeleton from '@/app/components/common/questSkeleton';
 
 const QuestDetailsPage = () => {
   const params = useParams();
-  const questId = params.id;
+  const questId = params.id as string;
+  const { campaignQuests, selectedCampaign, isLoadingDetails } = useCampaign();
 
-  const questDetails = {
-    title: 'Quest Title',
-    description: 'Detailed description of the quest and what users need to do to complete it.',
-    imageUrl: '/quest_images/image_1.png',
-    rewardAmount: '1000',
-    coinIcon: '/coin-box.svg',
-    status: 'active',
-    completionSteps: [
-      'Connect your wallet',
-      'Complete the task',
-      'Verify your participation',
-      'Claim your rewards',
-    ],
-    requirements: [
-      'Must have a compatible wallet',
-      'Must complete within the campaign duration',
-      'Must follow all guidelines',
-    ],
-  };
+  const quest = campaignQuests?.find(q => q.title.toLowerCase().replace(/\s+/g, '-') === questId);
 
-  return (
-    <div className="quest-details-page">
-      <Container>
-        <div className="quest-details-content">
+  if (isLoadingDetails || !quest) {
+    return (
+      <div className="quest-details-page">
+        <Container>
           <div className="quest-header">
             <Link href="/campaign" className="back-link">
               <ChevronLeft className="icon" /> BACK TO CAMPAIGN
             </Link>
           </div>
+          <QuestSkeleton />
+        </Container>
+      </div>
+    );
+  }
 
-          <div className="quest-main">
-            <div className="quest-image-container">
-              <Image
-                src={questDetails.imageUrl}
-                alt={questDetails.title}
-                fill
-                className="quest-image"
-                priority
-              />
-              <div className="quest-reward">
-                <div className="reward-badge">
-                  <Image
-                    src={questDetails.coinIcon}
-                    alt="Reward coin"
-                    width={25}
-                    height={20}
-                    className="coin-icon"
-                  />
-                  <span className="reward-amount">{questDetails.rewardAmount}</span>
+  return (
+    <div className="quest-details-page">
+      <Container>
+        <div className="quest-card">
+          {/* First Section: Split into left and right */}
+          <div className="quest-main-content">
+            {/* Left Section */}
+            <div className="quest-left-section">
+              {/* Rewards section */}
+              <div className="rewards-header">
+                <span className="rewards-label">Rewards</span>
+                <div className="rewards-value">
+                  <Image src={coinBoxImage} alt="Coin" width={24} height={24} />
+                  <span className="rewards-amount">{quest.rewardAmount}</span>
+                </div>
+              </div>
+
+              <div className="quest-info-container">
+                <div className="quest-header-section">
+                  <div className="quest-logo">
+                    <Image src={quest.imageUrl} alt="Campaign logo" width={40} height={40} />
+                    <span className="quest-source">Superboard</span>
+                  </div>
+                  <div className="quest-external-link">
+                    <svg
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </div>
+                </div>
+
+                <h1 className="quest-title">{quest.title}</h1>
+                <p className="quest-description">{quest.description}</p>
+
+                <div className="quest-stats">
+                  <div className="stat-item">
+                    <div className="stat-users">
+                      <span className="user-icon">👤</span>
+                      <span className="user-icon user-overlap">👤</span>
+                      <span className="user-icon user-overlap">👤</span>
+                    </div>
+                    <span className="stat-value">{quest.chadsCount} chads</span>
+                  </div>
+
+                  <div className="stat-item">
+                    <div className="progress-bar">
+                      <div
+                        className="progress-fill"
+                        style={{
+                          width: `${(quest.completedTasks / quest.totalTasks) * 100}%`,
+                        }}
+                      ></div>
+                    </div>
+                    <span className="stat-value">Beginner</span>
+                  </div>
+
+                  <div className="stat-item">
+                    <div className="blockchain-icon">
+                      <Image src={quest.chainIcon} alt="Chain" width={24} height={24} />
+                    </div>
+                    <span className="stat-value">Chain</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="quest-info">
-              <h1 className="quest-title">{questDetails.title}</h1>
-              <p className="quest-description">{questDetails.description}</p>
+            {/* Right Section */}
+            <div className="quest-right-section">
+              <div className="campaign-banner">
+                <div className="campaign-image">
+                  <Image
+                    src={quest.imageUrl}
+                    alt={quest.title}
+                    fill
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
 
-              <div className="quest-section">
-                <h2>How to Complete</h2>
-                <ol className="completion-steps">
-                  {questDetails.completionSteps.map((step, index) => (
-                    <li key={index}>{step}</li>
-                  ))}
-                </ol>
+          {/* Second Section: Mission */}
+          <div className="quest-mission-section">
+            <div className="mission-section">
+              <div className="mission-header">
+                <h2 className="section-title">Mission</h2>
+                <div className="mission-progress">
+                  <span className="progress-text">
+                    {quest.completedTasks}/{quest.totalTasks} Steps
+                  </span>
+                  <div className="progress-indicator">
+                    {Array.from({ length: quest.totalTasks }).map((_, index) => (
+                      <div
+                        key={index}
+                        className={`indicator-dot ${index < quest.completedTasks ? 'completed' : ''}`}
+                      ></div>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              <div className="quest-section">
-                <h2>Requirements</h2>
-                <ul className="requirements-list">
-                  {questDetails.requirements.map((req, index) => (
-                    <li key={index}>{req}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <button className="start-quest-btn">Start Quest</button>
+              <ul className="mission-tasks">
+                {quest.tasks.map((task, index) => (
+                  <li
+                    key={index}
+                    className={`task-item ${!task.isOpen ? 'locked' : ''} ${task.isCompleted ? 'completed' : ''}`}
+                  >
+                    <div className="task-number">{index + 1}.</div>
+                    <div className="task-icon">{task.taskIcon}</div>
+                    <div className="task-name">{task.name}</div>
+                    <div className="task-status">
+                      {!task.isOpen && (
+                        <svg
+                          viewBox="0 0 24 24"
+                          width="24"
+                          height="24"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="lock-icon"
+                        >
+                          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg>
+                      )}
+                      {task.isCompleted && (
+                        <svg
+                          viewBox="0 0 24 24"
+                          width="24"
+                          height="24"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="check-icon"
+                        >
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
