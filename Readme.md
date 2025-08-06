@@ -1,5 +1,5 @@
 Project Name:
-Superboard UI - Frontend Developer Technical Assignment
+Superboard UI 
 
 Project Description:
 My task is to build a responsive "Campaign page" similar to the provided mockup. This application will display campaign information across three device formats (desktop, tablet, and mobile) and will require both visual implementation and functional components.
