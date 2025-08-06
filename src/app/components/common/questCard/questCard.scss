@@ -1,0 +1,220 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.quest {
+  $self: &;
+
+  &-link {
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+  }
+
+  &-card {
+    position: relative;
+    @include flex-column;
+    overflow: hidden;
+    margin-bottom: $spacing-6;
+    height: 100%;
+    background: transparent;
+    transition: transform $transition-normal ease;
+
+    // Completed state styles
+    &--completed {
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          rgba($color-accent-purple, 0.05),
+          rgba($color-brand-green, 0.05)
+        );
+        border-radius: $border-radius-xl;
+        pointer-events: none;
+      }
+
+      .image-background {
+        filter: brightness(1.1);
+      }
+
+      .title {
+        display: flex;
+        align-items: center;
+        gap: $spacing-2;
+
+        .title-completion-icon {
+          color: $color-brand-green;
+          margin-left: $spacing-2;
+        }
+      }
+    }
+
+    .image {
+      &-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1 / 1;
+      }
+
+      &-background {
+        object-fit: cover;
+        border-radius: $border-radius-xl;
+        transition: transform $transition-normal ease;
+      }
+    }
+
+    .completion-badge {
+      position: absolute;
+      top: $spacing-3;
+      right: $spacing-3;
+      display: flex;
+      align-items: center;
+      gap: $spacing-1;
+      padding: $spacing-1 $spacing-2;
+      background-color: rgba($color-brand-green, 0.9);
+      color: $color-background-primary;
+      border-radius: $border-radius-full;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-semibold;
+      z-index: 5;
+
+      svg {
+        color: $color-background-primary;
+      }
+    }
+
+    .reward {
+      &-tag {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        @include flex-center;
+        width: fit-content;
+        padding: 0 $spacing-4;
+        z-index: 1;
+      }
+
+      &-badge {
+        @include flex-center;
+        gap: $spacing-2;
+        width: 100px;
+        padding: $spacing-1 $spacing-4;
+        border-radius: $border-radius-lg;
+        background-color: $color-brand-green;
+        border: 3px solid $color-background-primary;
+      }
+
+      &-text {
+        font-weight: 600;
+        color: $color-background-primary;
+        font-size: $font-size-base;
+      }
+    }
+
+    .coin-icon {
+      width: 40px;
+      height: auto;
+    }
+
+    .card-content {
+      margin-top: $spacing-6;
+      @include flex-column;
+      gap: $spacing-2;
+      flex: 1;
+
+      .title {
+        font-size: $font-size-md;
+        font-weight: 600;
+        color: $color-text-title;
+        line-height: 1.4;
+        min-height: 2.8em;
+        transition: color $transition-fast ease;
+        @include multi-line-truncate(2);
+
+        .title-completion-icon {
+          color: $color-brand-green;
+          flex-shrink: 0;
+        }
+      }
+
+      .meta {
+        @include flex-between;
+        font-weight: 600;
+        color: $color-text-secondary;
+
+        .chads,
+        .board {
+          font-weight: 500;
+          letter-spacing: 0.025em;
+          font-size: $font-size-sm;
+        }
+
+        .in-progress {
+          display: flex;
+          align-items: center;
+          gap: $spacing-2;
+          color: $color-accent-gold;
+          font-weight: $font-weight-medium;
+
+          svg {
+            animation: spin 2s linear infinite;
+          }
+
+          span {
+            font-size: $font-size-sm;
+          }
+        }
+
+        .completed {
+          display: flex;
+          align-items: center;
+          gap: $spacing-2;
+          color: $color-brand-green;
+          font-weight: $font-weight-medium;
+
+          span {
+            font-size: $font-size-sm;
+          }
+        }
+      }
+    }
+
+    #{$self}-tag {
+      background-color: $color-background-secondary;
+      color: $color-text-secondary;
+      font-size: $font-size-xs;
+      padding: $spacing-1 $spacing-2;
+      border-radius: $border-radius-md;
+      font-weight: 600;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    &:hover {
+      .image-background {
+        transform: scale(1.05);
+      }
+
+      .title {
+        color: $color-text-primary;
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

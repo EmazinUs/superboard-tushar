@@ -1,0 +1,104 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: $z-index-modal;
+}
+
+.modal-content {
+  background-color: $color-background-secondary;
+  color: $color-text-primary;
+  border-radius: $border-radius-lg;
+  padding: $spacing-5;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: $shadow-xl;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-4;
+
+  h2 {
+    margin: 0;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: $font-size-2xl;
+  cursor: pointer;
+  color: $color-text-secondary;
+
+  &:hover {
+    color: $color-text-primary;
+  }
+}
+
+.modal-body {
+  margin-bottom: $spacing-4;
+}
+
+.task-modal-content {
+  padding: $spacing-3 0;
+
+  .task-detail-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: $spacing-4;
+
+    .task-icon {
+      font-size: $font-size-xl;
+      margin-right: $spacing-3;
+    }
+
+    .task-name {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-semibold;
+      color: $color-text-primary;
+    }
+  }
+
+  .task-description {
+    margin-bottom: $spacing-5;
+    color: $color-text-secondary;
+    line-height: 1.6;
+  }
+
+  .task-complete-button {
+    width: 100%;
+    padding: $spacing-3;
+    background-color: $color-accent-blue;
+    color: $color-text-primary;
+    border: none;
+    border-radius: $border-radius-md;
+    font-weight: $font-weight-semibold;
+    cursor: pointer;
+    transition: background-color $transition-normal;
+
+    &:hover {
+      background-color: darken($color-accent-blue, 10%);
+    }
+
+    &:disabled {
+      background-color: $color-background-search;
+      cursor: not-allowed;
+    }
+  }
+}

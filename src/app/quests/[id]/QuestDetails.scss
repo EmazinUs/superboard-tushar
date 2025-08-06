@@ -1,0 +1,672 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.quest-details {
+  &-page {
+    min-height: 100vh;
+    padding: $spacing-4;
+    background-color: $color-background-primary;
+  }
+}
+
+.quest-card {
+  border-radius: $border-radius-lg;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow: hidden;
+  // background-color: $color-background-secondary;
+  // border: 1px solid $color-border;
+
+  .rewards-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-3 $spacing-4;
+    border-bottom: 1px solid $color-border;
+
+    .rewards-label {
+      color: $color-text-primary;
+      font-size: $font-size-base;
+    }
+
+    .rewards-value {
+      display: flex;
+      align-items: center;
+      gap: $spacing-2;
+
+      .rewards-amount {
+        font-weight: $font-weight-semibold;
+        font-size: $font-size-lg;
+        color: $color-text-primary;
+      }
+    }
+  }
+
+  .quest-info-container {
+    padding: $spacing-6;
+
+    .quest-header-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-4;
+
+      .quest-logo {
+        display: flex;
+        align-items: center;
+        gap: $spacing-2;
+
+        .quest-source {
+          font-size: $font-size-sm;
+          color: $color-text-secondary;
+        }
+      }
+
+      .quest-external-link {
+        color: $color-text-secondary;
+        cursor: pointer;
+
+        &:hover {
+          color: $color-text-primary;
+        }
+      }
+    }
+
+    .quest-title {
+      font-size: $font-size-2xl;
+      font-weight: $font-weight-bold;
+      margin: 0 0 $spacing-2;
+      color: $color-text-primary;
+    }
+
+    .quest-description {
+      font-size: $font-size-base;
+      line-height: 1.5;
+      color: $color-text-secondary;
+      margin-bottom: $spacing-6;
+    }
+
+    .quest-stats {
+      display: flex;
+      justify-content: flex-start;
+      gap: $spacing-8;
+      margin-bottom: $spacing-6;
+      border-top: 1px solid $color-border;
+      border-bottom: 1px solid $color-border;
+      padding: $spacing-4 0;
+
+      .stat-item {
+        display: flex;
+        align-items: center;
+        gap: $spacing-2;
+
+        .stat-users {
+          position: relative;
+          display: flex;
+          align-items: center;
+
+          .user-icon {
+            background-color: $color-background-secondary;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: $font-size-xs;
+            border: 1px solid $color-border;
+
+            &.user-overlap {
+              margin-left: -10px;
+            }
+          }
+        }
+
+        .stat-value {
+          font-size: $font-size-sm;
+          color: $color-text-secondary;
+        }
+
+        .progress-bar {
+          width: 100px;
+          height: 4px;
+          background-color: $color-background-secondary;
+          border-radius: 2px;
+          overflow: hidden;
+
+          .progress-fill {
+            height: 100%;
+            background-color: $color-brand-green;
+            border-radius: 4px;
+          }
+        }
+
+        .blockchain-icon {
+          width: 24px;
+          height: 24px;
+          color: $color-brand-green;
+        }
+      }
+    }
+  }
+
+  .quest-mission-section {
+    border-top: 1px solid $color-border;
+    padding: $spacing-6;
+    // background-color: $color-background-secondary;
+
+    .mission-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-6;
+
+      .section-title {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-semibold;
+        color: $color-text-primary;
+        margin: 0;
+      }
+
+      .mission-progress {
+        display: flex;
+        align-items: center;
+        gap: $spacing-3;
+
+        .progress-text {
+          font-size: $font-size-sm;
+          color: $color-text-secondary;
+        }
+
+        .progress-indicator {
+          display: flex;
+          gap: $spacing-1;
+
+          .indicator-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: $color-background-search;
+
+            &.completed {
+              background-color: $color-brand-green;
+            }
+          }
+        }
+      }
+    }
+
+    .mission-tasks {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      .task-item {
+        display: flex;
+        align-items: center;
+        gap: $spacing-4;
+        padding: $spacing-4;
+        border-radius: $border-radius-md;
+        margin-bottom: $spacing-2;
+        transition: all $transition-normal ease;
+
+        &.locked {
+          opacity: 0.7;
+          background: $color-background-search;
+          cursor: not-allowed;
+        }
+
+        &:not(.locked):not(.completed) {
+          cursor: pointer;
+          background: $color-background-search;
+          position: relative;
+
+          &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background-color: $color-accent-blue;
+            border-top-left-radius: $border-radius-md;
+            border-bottom-left-radius: $border-radius-md;
+          }
+
+          &:hover {
+            background-color: lighten($color-background-search, 5%);
+            transform: translateY(-2px);
+            box-shadow: $shadow-md;
+          }
+        }
+
+        &.completed {
+          background: $color-background-secondary;
+          cursor: default;
+
+          .task-status {
+            color: $color-accent-blue;
+          }
+        }
+
+        .task-number {
+          font-weight: $font-weight-semibold;
+          color: $color-text-secondary;
+          min-width: 2rem;
+        }
+
+        .task-icon {
+          font-size: $font-size-lg;
+        }
+
+        .task-name {
+          flex: 1;
+          font-weight: $font-weight-medium;
+          color: $color-text-primary;
+        }
+
+        .task-status {
+          width: 24px;
+          height: 24px;
+          color: $color-text-secondary;
+
+          .unlock-icon {
+            color: $color-accent-blue;
+          }
+
+          .check-icon {
+            color: $color-brand-green;
+          }
+        }
+      }
+    }
+  }
+}
+
+.quest-header {
+  padding: $spacing-4;
+
+  .back-link {
+    @include flex-center;
+    color: $color-text-primary;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    transition: opacity 0.2s ease;
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    .icon {
+      width: 1rem;
+      height: 1rem;
+      margin-right: $spacing-1;
+    }
+  }
+}
+.quest-details-page {
+  padding: 2rem 0;
+
+  .quest-card {
+    background: $color-background-primary;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    // First section with left-right split
+    .quest-main-content {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+
+      .quest-left-section {
+        flex: 1;
+        min-width: 0; // Prevent flex item from overflowing
+
+        .rewards-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1.5rem;
+          padding: 1rem;
+          border-radius: 0.5rem;
+
+          .rewards-label {
+            font-weight: 600;
+            color: #666;
+          }
+
+          .rewards-value {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            .rewards-amount {
+              font-weight: 700;
+              color: #ffffff;
+            }
+          }
+        }
+
+        .quest-info-container {
+          .quest-header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+
+            .quest-logo {
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+
+              .quest-source {
+                font-weight: 500;
+                color: #4a5568;
+              }
+            }
+          }
+
+          .quest-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+          }
+
+          .quest-description {
+            color: $color-text-secondary;
+            margin-bottom: 1.5rem;
+          }
+
+          .quest-stats {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+
+            .stat-item {
+              display: flex;
+              align-items: center;
+              gap: 0.5rem;
+
+              .stat-users {
+                position: relative;
+                display: flex;
+
+                .user-icon {
+                  &.user-overlap {
+                    margin-left: -0.5rem;
+                  }
+                }
+              }
+
+              .progress-bar {
+                width: 100px;
+                height: 4px;
+                background: #e2e8f0;
+                border-radius: 2px;
+                overflow: hidden;
+
+                .progress-fill {
+                  height: 100%;
+                  background: #4299e1;
+                  transition: width 0.3s ease;
+                }
+              }
+
+              .blockchain-icon {
+                display: flex;
+                align-items: center;
+
+                img {
+                  border-radius: 50%;
+                }
+              }
+
+              .stat-value {
+                font-size: 0.875rem;
+                color: #4a5568;
+                font-weight: 500;
+              }
+            }
+          }
+        }
+      }
+
+      .quest-right-section {
+        flex: 1;
+        max-width: 50%;
+
+        .campaign-banner {
+          position: relative;
+          width: 100%;
+          padding-top: 56.25%; // 16:9 aspect ratio
+          border-radius: 1rem;
+          overflow: hidden;
+
+          .campaign-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+          }
+        }
+      }
+    }
+
+    // Second section with mission
+    .quest-mission-section {
+      padding-top: 2rem;
+
+      .mission-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+
+        .section-title {
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: #ffffff;
+        }
+
+        .mission-progress {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+
+          .progress-text {
+            color: $color-text-secondary;
+          }
+
+          .progress-indicator {
+            display: flex;
+            gap: 0.25rem;
+
+            .indicator-dot {
+              width: 8px;
+              height: 8px;
+              border-radius: 50%;
+              background: #e2e8f0;
+
+              &.completed {
+                background: #4299e1;
+              }
+            }
+          }
+        }
+      }
+
+      .mission-tasks {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        .task-item {
+          display: flex;
+          align-items: center;
+          gap: $spacing-4;
+          padding: $spacing-4;
+          border-radius: $border-radius-md;
+          margin-bottom: $spacing-2;
+          transition: all $transition-normal ease;
+
+          &.locked {
+            opacity: 0.7;
+            background: $color-background-search;
+            cursor: not-allowed;
+          }
+
+          &:not(.locked):not(.completed) {
+            cursor: pointer;
+            background: $color-background-search;
+            position: relative;
+
+            &::after {
+              content: '';
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 4px;
+              height: 100%;
+              background-color: $color-accent-blue;
+              border-top-left-radius: $border-radius-md;
+              border-bottom-left-radius: $border-radius-md;
+            }
+
+            &:hover {
+              background-color: lighten($color-background-search, 5%);
+              transform: translateY(-2px);
+              box-shadow: $shadow-md;
+            }
+          }
+
+          &.completed {
+            background: $color-background-secondary;
+            cursor: default;
+
+            .task-status {
+              color: $color-accent-blue;
+            }
+          }
+
+          .task-number {
+            font-weight: $font-weight-semibold;
+            color: $color-text-secondary;
+            min-width: 2rem;
+          }
+
+          .task-icon {
+            font-size: $font-size-lg;
+          }
+
+          .task-name {
+            flex: 1;
+            font-weight: $font-weight-medium;
+            color: $color-text-primary;
+          }
+
+          .task-status {
+            width: 24px;
+            height: 24px;
+            color: $color-text-secondary;
+
+            .unlock-icon {
+              color: $color-accent-blue;
+            }
+
+            .check-icon {
+              color: $color-brand-green;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.web2-action {
+  margin-top: $spacing-4;
+  padding: $spacing-3;
+  background-color: rgba($color-accent-blue, 0.1);
+  border-radius: $border-radius-md;
+
+  p {
+    margin-bottom: $spacing-3;
+    font-size: $font-size-sm;
+  }
+
+  .external-link {
+    display: inline-block;
+    padding: $spacing-2 $spacing-4;
+    background-color: $color-accent-blue;
+    color: $color-text-primary;
+    border-radius: $border-radius-sm;
+    text-decoration: none;
+    font-weight: $font-weight-medium;
+    transition: background-color $transition-normal;
+
+    &:hover {
+      background-color: darken($color-accent-blue, 10%);
+    }
+  }
+}
+
+.quest-completed-banner {
+  background: linear-gradient(
+    45deg,
+    rgba($color-accent-purple, 0.2),
+    rgba($color-brand-green, 0.2)
+  );
+  border: 1px solid rgba($color-accent-purple, 0.3);
+  border-radius: $border-radius-md;
+  padding: $spacing-4;
+  margin-bottom: $spacing-4;
+  display: flex;
+  align-items: center;
+
+  svg {
+    color: $color-accent-gold;
+    margin-right: $spacing-2;
+  }
+
+  span {
+    color: $color-text-primary;
+    font-weight: $font-weight-semibold;
+    margin-right: $spacing-4;
+  }
+
+  .rewards-earned {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+
+    span {
+      margin-left: $spacing-1;
+      color: $color-accent-gold;
+    }
+  }
+}
+
+.quest-title {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+
+  .quest-completed-icon {
+    color: $color-brand-green;
+  }
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: $spacing-2;
+
+  .mission-completed-icon {
+    color: $color-brand-green;
+  }
+}

@@ -1,0 +1,108 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.rank-card {
+  width: 100%;
+  padding: $spacing-6;
+  background-color: rgba($color-background-secondary, 0.4);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba($color-border, 0.2);
+  border-radius: $border-radius-lg;
+  @include flex-between;
+  align-items: flex-start;
+  gap: $spacing-6;
+
+  @include mobile {
+    flex-direction: column;
+    padding: $spacing-4;
+    gap: $spacing-4;
+  }
+
+  .locked-rank {
+    @include flex-column;
+    gap: $spacing-4;
+    width: 100%;
+
+    .rank-info {
+      @include flex-between;
+      gap: $spacing-3;
+    }
+
+    .lock-icon {
+      color: $color-accent-gold;
+      @include flex-center;
+      width: 32px;
+      height: 32px;
+      padding: $spacing-2;
+      background: rgba($color-accent-gold, 0.1);
+      border-radius: $border-radius-full;
+      margin-left: $spacing-2;
+      margin-right: $spacing-2;
+    }
+
+    .you-badge {
+      @include flex-center;
+      gap: $spacing-2;
+
+      img {
+        border-radius: 50%;
+      }
+
+      span {
+        font-weight: 600;
+        font-size: $font-size-sm;
+        color: $color-text-primary;
+      }
+    }
+
+    .rank-message {
+      color: $color-text-secondary;
+      font-size: $font-size-base;
+    }
+  }
+
+  .unlock-message {
+    text-align: right;
+
+    .unlock-title {
+      font-size: $font-size-base;
+      font-weight: 600;
+      color: $color-text-primary;
+      margin-bottom: $spacing-1;
+    }
+
+    .unlock-subtitle {
+      font-size: $font-size-sm;
+      color: $color-text-secondary;
+    }
+  }
+
+  .unlocked-rank {
+    width: 100%;
+    @include flex-between;
+
+    .rank-text {
+      font-weight: 600;
+      font-size: $font-size-base;
+      color: $color-accent-blue;
+    }
+  }
+}
+
+@include mobile {
+  .rank-card {
+    padding: $spacing-3;
+
+    .locked-rank,
+    .unlocked-rank {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $spacing-2;
+      width: 100%;
+
+      .you-label {
+        margin-right: 0;
+      }
+    }
+  }
+}

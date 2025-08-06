@@ -1,0 +1,146 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins.scss';
+
+.campaign-stats-card {
+  display: flex;
+  justify-content: space-between;
+  background-color: #232228;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  min-height: 140px;
+  width: 100%;
+  position: relative;
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    max-width: calc(100% - 80px);
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+
+    .iconClass {
+      width: 1rem;
+      height: 1rem;
+      margin-right: $spacing-1;
+      color: #7e52e8;
+    }
+  }
+
+  .title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #7e52e8;
+    margin: 0;
+    text-transform: uppercase;
+  }
+
+  .value-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+  }
+
+  .description {
+    font-size: 14px;
+    font-weight: 400;
+    color: #a6a6b0;
+    margin: 0;
+    max-width: 90%;
+    line-height: 1.5;
+
+    @media (max-width: 480px) {
+      font-size: 13px;
+    }
+  }
+
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+
+    img {
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+
+  .title {
+    color: #8b5cf6;
+  }
+
+  // Loading state
+  .skeleton {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    .skeleton-title {
+      width: 120px;
+      height: 16px;
+      background: linear-gradient(90deg, #2a2a30 0%, #343438 50%, #2a2a30 100%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 4px;
+    }
+
+    .skeleton-value {
+      width: 180px;
+      height: 24px;
+      background: linear-gradient(90deg, #2a2a30 0%, #343438 50%, #2a2a30 100%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 4px;
+    }
+
+    .skeleton-description {
+      width: 80%;
+      height: 16px;
+      background: linear-gradient(90deg, #2a2a30 0%, #343438 50%, #2a2a30 100%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+      border-radius: 4px;
+    }
+  }
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
